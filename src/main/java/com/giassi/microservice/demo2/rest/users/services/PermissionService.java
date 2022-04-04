@@ -7,7 +7,8 @@ import com.giassi.microservice.demo2.rest.users.exceptions.PermissionInUseExcept
 import com.giassi.microservice.demo2.rest.users.exceptions.PermissionNotFoundException;
 import com.giassi.microservice.demo2.rest.users.repositories.PermissionRepository;
 import com.google.common.base.Strings;
-import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,8 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
-@Slf4j
 public class PermissionService {
+    private static final Logger log = LogManager.getLogger("PermissionService");
 
     @Autowired
     private PermissionRepository permissionRepository;
@@ -130,5 +131,4 @@ public class PermissionService {
 
         log.info(String.format("Deleted permission with key %s", permission.getPermission()));
     }
-
 }

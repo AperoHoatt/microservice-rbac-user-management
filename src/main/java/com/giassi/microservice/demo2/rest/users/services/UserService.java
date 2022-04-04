@@ -13,7 +13,8 @@ import com.giassi.microservice.demo2.rest.users.services.validation.EmailValidat
 import com.giassi.microservice.demo2.rest.users.services.validation.PasswordValidator;
 import com.giassi.microservice.demo2.rest.users.services.validation.PhoneValidator;
 import com.google.common.base.Strings;
-import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Slf4j
 public class UserService {
+    private static final Logger log = LogManager.getLogger("UserService");
 
     @Autowired
     private UserRepository userRepository;
@@ -134,10 +135,10 @@ public class UserService {
     // check if the username has not been registered
     public void checkIfUsernameNotUsed(String username) {
         User userByUsername = getUserByUsername(username);
-            if (userByUsername != null) {
-                String msg = String.format("The username %s it's already in use from another user with ID = %s",
-                        userByUsername.getUsername(), userByUsername.getId());
-                log.error(msg);
+        if (userByUsername != null) {
+            String msg = String.format("The username %s it's already in use from another user with ID = %s",
+                    userByUsername.getUsername(), userByUsername.getId());
+            log.error(msg);
             throw new InvalidUserDataException(msg);
         }
     }

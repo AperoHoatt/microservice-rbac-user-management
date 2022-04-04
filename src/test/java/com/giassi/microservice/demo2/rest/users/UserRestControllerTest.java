@@ -62,22 +62,27 @@ public class UserRestControllerTest {
 
     @Test
     public void test_createUser() {
-        CreateOrUpdateUserDTO createOrUpdateUserDTO = CreateOrUpdateUserDTO.builder()
-               .username("frank")
-               .password("Frank!123")
-               .name("Frank")
-               .surname("Blu")
-               .gender("MALE")
-               .enabled(true)
-               .note("created for test")
-               .email("frank.blu@gmail.com")
-               .phone("+3531194334455")
-                .skype("skype").facebook("facebook").linkedin("linkedin").website("www.test.com").contactNote("Test on contact")
-               .address("dark road 1")
-               .address2("salt hill")
-               .city("Dublin")
-               .country("Ireland")
-               .zipCode("47335").build();
+        CreateOrUpdateUserDTO createOrUpdateUserDTO = new CreateOrUpdateUserDTO.Builder()
+                .setUsername("frank")
+                .setPassword("Frank!123")
+                .setName("Frank")
+                .setSurname("Blu")
+                .setGender("MALE")
+                .setEnabled(true)
+                .setNote("created for test")
+                .setEmail("frank.blu@gmail.com")
+                .setPhone("+3531194334455")
+                .setSkype("skype")
+                .setFacebook("facebook")
+                .setLinkedin("linkedin")
+                .setWebsite("www.test.com")
+                .setContactNote("Test on contact")
+                .setAddress("dark road 1")
+                .setAddress2("salt hill")
+                .setCity("Dublin")
+                .setCountry("Ireland")
+                .setZipCode("47335")
+                .build();
 
         URI uri = URI.create("/users");
 
@@ -127,13 +132,13 @@ public class UserRestControllerTest {
     @Test
     public void test_updateUser() {
         // create a new user to update
-        RegisterUserAccountDTO quickAccount = RegisterUserAccountDTO.builder()
-                .username("anna")
-                .password("Anna!123")
-                .name("Anna")
-                .surname("Verdi")
-                .gender("FEMALE")
-                .email("anna.verdi@gmail.com")
+        RegisterUserAccountDTO quickAccount = new RegisterUserAccountDTO.Builder()
+                .setUsername("anna")
+                .setPassword("Anna!123")
+                .setName("Anna")
+                .setSurname("Verdi")
+                .setGender("FEMALE")
+                .setEmail("anna.verdi@gmail.com")
                 .build();
 
         String registerAccountURL = "/users/register";
@@ -149,22 +154,27 @@ public class UserRestControllerTest {
         Long userId = userDTO.getId();
         URI uri = URI.create("/users/" + userId);
 
-        CreateOrUpdateUserDTO createOrUpdateUserDTO = CreateOrUpdateUserDTO.builder()
-                .username("anna")
-                .password("Anna!123456")
-                .name("Anna")
-                .surname("Verdi")
-                .gender("FEMALE")
-                .enabled(true)
-                .note("updated for test")
-                .email("anna.verdi@gmail.com")
-                .phone("+3531194334455")
-                .skype("skype").facebook("facebook").linkedin("linkedin").website("www.test.com").contactNote("Test on contact")
-                .address("The sunny road 15")
-                .address2("Sunny valley")
-                .city("Dublin")
-                .country("Ireland")
-                .zipCode("47335").build();
+        CreateOrUpdateUserDTO createOrUpdateUserDTO = new CreateOrUpdateUserDTO.Builder()
+                .setUsername("anna")
+                .setPassword("Anna!123456")
+                .setName("Anna")
+                .setSurname("Verdi")
+                .setGender("FEMALE")
+                .setEnabled(true)
+                .setNote("updated for test")
+                .setEmail("anna.verdi@gmail.com")
+                .setPhone("+3531194334455")
+                .setSkype("skype")
+                .setFacebook("facebook")
+                .setLinkedin("linkedin")
+                .setWebsite("www.test.com")
+                .setContactNote("Test on contact")
+                .setAddress("The sunny road 15")
+                .setAddress2("Sunny valley")
+                .setCity("Dublin")
+                .setCountry("Ireland")
+                .setZipCode("47335")
+                .build();
 
         HttpEntity<CreateOrUpdateUserDTO> request = new HttpEntity<>(createOrUpdateUserDTO);
         ResponseEntity<UserDTO> response = restTemplate.exchange(uri, HttpMethod.PUT, request, UserDTO.class);
@@ -212,13 +222,13 @@ public class UserRestControllerTest {
     @Test
     public void test_deleteUser() {
         // create a new user to test the deletion
-        RegisterUserAccountDTO quickAccount = RegisterUserAccountDTO.builder()
-                .username("anna2")
-                .password("Anna2!123")
-                .name("Anna2")
-                .surname("Verdi")
-                .gender("FEMALE")
-                .email("anna2.verdi@gmail.com")
+        RegisterUserAccountDTO quickAccount = new RegisterUserAccountDTO.Builder()
+                .setUsername("anna2")
+                .setPassword("Anna2!123")
+                .setName("Anna2")
+                .setSurname("Verdi")
+                .setGender("FEMALE")
+                .setEmail("anna2.verdi@gmail.com")
                 .build();
 
         String registerAccountURL = "/users/register";
@@ -243,13 +253,13 @@ public class UserRestControllerTest {
     @Test
     public void test_addRoleOnUser() {
         // create a new user
-        RegisterUserAccountDTO registerUserAccountDTO = RegisterUserAccountDTO.builder()
-                .username("anna")
-                .password("Anna!123")
-                .name("Anna")
-                .surname("Verdi")
-                .gender("FEMALE")
-                .email("anna.verdi@gmail.com")
+        RegisterUserAccountDTO registerUserAccountDTO = new RegisterUserAccountDTO.Builder()
+                .setUsername("anna")
+                .setPassword("Anna!123")
+                .setName("Anna")
+                .setSurname("Verdi")
+                .setGender("FEMALE")
+                .setEmail("anna.verdi@gmail.com")
                 .build();
 
         String registerAccountURL = "/users/register";
@@ -308,13 +318,13 @@ public class UserRestControllerTest {
     @Test
     public void test_removeRoleOnUser() {
         // create a new user
-        RegisterUserAccountDTO registerUserAccountDTO = RegisterUserAccountDTO.builder()
-                .username("anna")
-                .password("Anna!123")
-                .name("Anna")
-                .surname("Verdi")
-                .gender("FEMALE")
-                .email("anna.verdi@gmail.com")
+        RegisterUserAccountDTO registerUserAccountDTO = new RegisterUserAccountDTO.Builder()
+                .setUsername("anna")
+                .setPassword("Anna!123")
+                .setName("Anna")
+                .setSurname("Verdi")
+                .setGender("FEMALE")
+                .setEmail("anna.verdi@gmail.com")
                 .build();
 
         String registerAccountURL = "/users/register";
@@ -380,13 +390,13 @@ public class UserRestControllerTest {
     @Test
     public void test_delete_securedUser_return_BAD_REQUEST() {
         // create a new user to test the deletion
-        RegisterUserAccountDTO quickAccount = RegisterUserAccountDTO.builder()
-                .username("anna2")
-                .password("Anna2!123")
-                .name("Anna2")
-                .surname("Verdi")
-                .gender("FEMALE")
-                .email("anna2.verdi@gmail.com")
+        RegisterUserAccountDTO quickAccount = new RegisterUserAccountDTO.Builder()
+                .setUsername("anna2")
+                .setPassword("Anna2!123")
+                .setName("Anna2")
+                .setSurname("Verdi")
+                .setGender("FEMALE")
+                .setEmail("anna2.verdi@gmail.com")
                 .build();
 
         String registerAccountURL = "/users/register";

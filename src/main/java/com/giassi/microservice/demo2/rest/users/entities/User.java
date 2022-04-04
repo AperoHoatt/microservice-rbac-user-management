@@ -1,33 +1,34 @@
 package com.giassi.microservice.demo2.rest.users.entities;
 
-import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name="users")
-@Data
+@Table(name = "users")
 public class User {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO, generator="native")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-    @Column(name="id")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name="username", nullable = false)
+    @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name="password", nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name="name", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name="surname", nullable = false)
+    @Column(name = "surname", nullable = false)
     private String surname;
 
     @Enumerated
@@ -44,10 +45,10 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Address address;
 
-    @Column(name="enabled")
+    @Column(name = "enabled", columnDefinition = "TINYINT(1) default 1")
     private boolean enabled;
 
-    @Column(name="note")
+    @Column(name = "note")
     private String note;
 
     @Basic
@@ -59,13 +60,197 @@ public class User {
     @Basic
     private java.time.LocalDateTime loginDt;
 
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",
-               joinColumns = @JoinColumn(name = "user_id"),
-               inverseJoinColumns = @JoinColumn(name = "role_id"))
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @Column(name="secured")
+    @Column(name = "secured", columnDefinition = "TINYINT(1) default 1")
     private boolean secured;
 
+    public User() {
+    }
+
+    public User(Long id, String username, String password, String name, String surname, Gender gender, LocalDate birthDate, Contact contact, Address address, boolean enabled, String note, LocalDateTime creationDt, LocalDateTime updatedDt, LocalDateTime loginDt, Set<Role> roles, boolean secured) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.surname = surname;
+        this.gender = gender;
+        this.birthDate = birthDate;
+        this.contact = contact;
+        this.address = address;
+        this.enabled = enabled;
+        this.note = note;
+        this.creationDt = creationDt;
+        this.updatedDt = updatedDt;
+        this.loginDt = loginDt;
+        this.roles = roles;
+        this.secured = secured;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public LocalDateTime getCreationDt() {
+        return creationDt;
+    }
+
+    public void setCreationDt(LocalDateTime creationDt) {
+        this.creationDt = creationDt;
+    }
+
+    public LocalDateTime getUpdatedDt() {
+        return updatedDt;
+    }
+
+    public void setUpdatedDt(LocalDateTime updatedDt) {
+        this.updatedDt = updatedDt;
+    }
+
+    public LocalDateTime getLoginDt() {
+        return loginDt;
+    }
+
+    public void setLoginDt(LocalDateTime loginDt) {
+        this.loginDt = loginDt;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public boolean isSecured() {
+        return secured;
+    }
+
+    public void setSecured(boolean secured) {
+        this.secured = secured;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", gender=" + gender +
+                ", birthDate=" + birthDate +
+                ", contact=" + contact +
+                ", address=" + address +
+                ", enabled=" + enabled +
+                ", note='" + note + '\'' +
+                ", creationDt=" + creationDt +
+                ", updatedDt=" + updatedDt +
+                ", loginDt=" + loginDt +
+                ", roles=" + roles +
+                ", secured=" + secured +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return enabled == user.enabled && secured == user.secured && Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(name, user.name) && Objects.equals(surname, user.surname) && gender == user.gender && Objects.equals(birthDate, user.birthDate) && Objects.equals(contact, user.contact) && Objects.equals(address, user.address) && Objects.equals(note, user.note) && Objects.equals(creationDt, user.creationDt) && Objects.equals(updatedDt, user.updatedDt) && Objects.equals(loginDt, user.loginDt) && Objects.equals(roles, user.roles);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, password, name, surname, gender, birthDate, contact, address, enabled, note, creationDt, updatedDt, loginDt, roles, secured);
+    }
 }

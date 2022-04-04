@@ -172,13 +172,13 @@ public class UserServiceTest {
 
         given(userRepository.findByUsername("andrea")).willReturn(userDataForTest);
 
-        RegisterUserAccountDTO registerUserAccountDTO = RegisterUserAccountDTO.builder()
-                .name("Andrea")
-                .surname("Giassi")
-                .email("andrea.test@gmail.com")
-                .gender("MALE")
-                .username("andrea")
-                .password(UserTestHelper.TEST_PASSWORD_DECRYPTED)
+        RegisterUserAccountDTO registerUserAccountDTO = new RegisterUserAccountDTO.Builder()
+                .setName("Andrea")
+                .setSurname("Giassi")
+                .setEmail("andrea.test@gmail.com")
+                .setGender("MALE")
+                .setUsername("andrea")
+                .setPassword(UserTestHelper.TEST_PASSWORD_DECRYPTED)
                 .build();
 
         userService.registerUserAccount(registerUserAccountDTO);
@@ -192,14 +192,14 @@ public class UserServiceTest {
         given(userRepository.findByEmail("andrea.test@gmail.com")).willReturn(userDataForTest);
 
         // existing email
-        RegisterUserAccountDTO registerUserAccountDTO = RegisterUserAccountDTO.builder()
-                .name("Marco")
-                .password("Marco!123")
-                .surname("Rossi")
-                .email("andrea.test@gmail.com")
-                .gender("MALE")
-                .username("marco")
-                .password(UserTestHelper.TEST_PASSWORD_DECRYPTED)
+        RegisterUserAccountDTO registerUserAccountDTO = new RegisterUserAccountDTO.Builder()
+                .setName("Marco")
+                .setPassword("Marco!123")
+                .setSurname("Rossi")
+                .setEmail("andrea.test@gmail.com")
+                .setGender("MALE")
+                .setUsername("marco")
+                .setPassword(UserTestHelper.TEST_PASSWORD_DECRYPTED)
                 .build();
 
         userService.registerUserAccount(registerUserAccountDTO);
@@ -245,7 +245,9 @@ public class UserServiceTest {
 
     @Test(expected = InvalidUserDataException.class)
     public void given_already_registered_username_when_createUser_throw_InvalidUserDataException() {
-        CreateOrUpdateUserDTO createOrUpdateUserDTO = CreateOrUpdateUserDTO.builder().username("andrea").build();
+        CreateOrUpdateUserDTO createOrUpdateUserDTO = new CreateOrUpdateUserDTO.Builder()
+                .setUsername("andrea")
+                .build();
 
         User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
                 "Giassi", "andrea.test@gmail.com", "+3531122334455");
@@ -258,14 +260,15 @@ public class UserServiceTest {
     @Test(expected = InvalidUserDataException.class)
     public void given_already_registered_email_when_createUser_throw_InvalidUserDataException() {
         // existing email
-        CreateOrUpdateUserDTO createOrUpdateUserDTO = CreateOrUpdateUserDTO.builder()
-                .name("Marco")
-                .surname("Rossi")
-                .email("andrea.test@gmail.com")
-                .gender("MALE")
-                .username("marco")
-                .phone("+3531122334466")
-                .enabled(true).build();
+        CreateOrUpdateUserDTO createOrUpdateUserDTO = new CreateOrUpdateUserDTO.Builder()
+                .setName("Marco")
+                .setSurname("Rossi")
+                .setEmail("andrea.test@gmail.com")
+                .setGender("MALE")
+                .setUsername("marco")
+                .setPhone("+3531122334466")
+                .setEnabled(true)
+                .build();
 
         User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
                 "Giassi", "andrea.test@gmail.com", "+3531122334455");
@@ -314,14 +317,14 @@ public class UserServiceTest {
     @Test(expected = InvalidUserDataException.class)
     public void given_existing_username_when_updateUser_throw_InvalidUserDataException() {
         // setting an existing username
-        CreateOrUpdateUserDTO createOrUpdateUserDTO = CreateOrUpdateUserDTO.builder()
-                .name("Marco")
-                .surname("Rossi")
-                .email("andrea.test@gmail.com")
-                .gender("MALE")
-                .username("andrea")
-                .phone("+3531122334466")
-                .enabled(true)
+        CreateOrUpdateUserDTO createOrUpdateUserDTO = new CreateOrUpdateUserDTO.Builder()
+                .setName("Marco")
+                .setSurname("Rossi")
+                .setEmail("andrea.test@gmail.com")
+                .setGender("MALE")
+                .setUsername("andrea")
+                .setPhone("+3531122334466")
+                .setEnabled(true)
                 .build();
 
         User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
@@ -338,15 +341,15 @@ public class UserServiceTest {
     @Test(expected = InvalidUserDataException.class)
     public void given_existing_email_when_updateUser_throw_InvalidUserDataException() {
         // setting an existing email
-        CreateOrUpdateUserDTO createOrUpdateUserDTO = CreateOrUpdateUserDTO.builder()
-                .name("Marco")
-                .surname("Rossi")
-                .email("andrea.test@gmail.com")
-                .gender("MALE")
-                .username("marco")
-                .password("Test!123")
-                .phone("+3531122334466")
-                .enabled(true)
+        CreateOrUpdateUserDTO createOrUpdateUserDTO = new CreateOrUpdateUserDTO.Builder()
+                .setName("Marco")
+                .setSurname("Rossi")
+                .setEmail("andrea.test@gmail.com")
+                .setGender("MALE")
+                .setUsername("marco")
+                .setPassword("Test!123")
+                .setPhone("+3531122334466")
+                .setEnabled(true)
                 .build();
 
         User userDataForTest = getUserTestData(1L, "andrea", "Andrea",
@@ -363,16 +366,19 @@ public class UserServiceTest {
     @Test
     public void given_existing_user_when_updatedUser_return_userUpdated() {
         // correct user data, update the phone number
-        CreateOrUpdateUserDTO createOrUpdateUserDTO = CreateOrUpdateUserDTO.builder()
-                .name("Andrea")
-                .surname("Giassi")
-                .email("andrea.test@gmail.com")
-                .gender("MALE")
-                .username("andrea")
-                .password("Test!123")
-                .phone("+3539988776655")
-                .enabled(true)
-                .address("via roma 3").city("Rome").country("Italy").zipCode("00100")
+        CreateOrUpdateUserDTO createOrUpdateUserDTO = new CreateOrUpdateUserDTO.Builder()
+                .setName("Andrea")
+                .setSurname("Giassi")
+                .setEmail("andrea.test@gmail.com")
+                .setGender("MALE")
+                .setUsername("andrea")
+                .setPassword("Test!123")
+                .setPhone("+3539988776655")
+                .setEnabled(true)
+                .setAddress("via roma 3")
+                .setCity("Rome")
+                .setCountry("Italy")
+                .setZipCode("00100")
                 .build();
 
         User userDataForTest = getUserTestData(1L, "andrea", "Andrea",

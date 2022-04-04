@@ -1,7 +1,6 @@
 package com.giassi.microservice.demo2.rest.users.services;
 
 import com.giassi.microservice.demo2.rest.users.exceptions.InvalidConfigurationException;
-import com.google.common.base.Strings;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -14,9 +13,8 @@ import java.util.Random;
 
 /**
  * Provides a set of methods to encrypt or decrypt a String information.
- *
+ * <p>
  * See {@http://www.appsdeveloperblog.com/ http://www.appsdeveloperblog.com/encrypt-user-password-example-java/}
- *
  */
 public class EncryptionService {
 
@@ -52,7 +50,7 @@ public class EncryptionService {
     }
 
     public static String encrypt(String password, String salt) {
-        if (Strings.isNullOrEmpty(salt)) {
+        if (salt == null || salt.trim().isEmpty()) {
             throw new InvalidConfigurationException("Invalid salt: Wrong configuration. Salt cannot be empty or null");
         }
         byte[] securePassword = hash(password.toCharArray(), salt.getBytes());
@@ -60,8 +58,7 @@ public class EncryptionService {
     }
 
     public static boolean isPasswordValid(String providedPassword,
-                                          String securedPassword, String salt)
-    {
+                                          String securedPassword, String salt) {
         // Generate new secure password with the same salt
         String newSecurePassword = encrypt(providedPassword, salt);
         // Check if the passwords are equal

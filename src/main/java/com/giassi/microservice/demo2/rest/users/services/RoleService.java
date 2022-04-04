@@ -6,7 +6,8 @@ import com.giassi.microservice.demo2.rest.users.exceptions.*;
 import com.giassi.microservice.demo2.rest.users.repositories.PermissionRepository;
 import com.giassi.microservice.demo2.rest.users.repositories.RoleRepository;
 import com.google.common.base.Strings;
-import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,8 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
-@Slf4j
 public class RoleService {
+    private static final Logger log = LogManager.getLogger("RoleService");
 
     @Autowired
     private RoleRepository roleRepository;
@@ -79,7 +80,7 @@ public class RoleService {
         Long countUsages = roleRepository.countRoleUsage(id);
         if (countUsages > 0) {
             String errMsg = String.format("The role %s %s is in use (%s users_roles configuration rows)" +
-                            " and cannot be deleted", role.getId(), role.getRole(), countUsages);
+                    " and cannot be deleted", role.getId(), role.getRole(), countUsages);
             log.error(errMsg);
             throw new RoleInUseException(errMsg);
         }
@@ -125,7 +126,7 @@ public class RoleService {
         // check if this role contains already the given permission
         if (role.getPermissions().contains(permission)) {
             throw new InvalidPermissionDataException(String.format("The permission %s has been already" +
-                            " associated on the role %s", permission.getPermission(), role.getRole() ));
+                    " associated on the role %s", permission.getPermission(), role.getRole()));
         }
 
         role.getPermissions().add(permission);

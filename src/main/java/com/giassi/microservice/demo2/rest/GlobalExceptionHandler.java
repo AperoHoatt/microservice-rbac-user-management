@@ -6,7 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-/** Handles the exceptions globally in this microservice */
+/**
+ * Handles the exceptions globally in this microservice
+ */
 @ControllerAdvice
 public class GlobalExceptionHandler {
 

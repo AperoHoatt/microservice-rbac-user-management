@@ -20,7 +20,7 @@ public enum Gender {
         Gender gender;
         try {
             gender = Gender.valueOf(genderName);
-        } catch(IllegalArgumentException ex) {
+        } catch (IllegalArgumentException ex) {
             throw new InvalidGenderException(String.format("Invalid gender string %s. Are supported only: MALE or FEMALE strings", genderName));
         }
         return gender;

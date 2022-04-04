@@ -29,13 +29,13 @@ public class RegisterRestControllerTest {
     @Test
     public void test_createNewUserAccount() {
         // create a new user using the quick account endpoint
-        RegisterUserAccountDTO quickAccount = RegisterUserAccountDTO.builder()
-                .username("violet")
-                .password("Violet!123")
-                .name("Marco")
-                .surname("Violet")
-                .gender("MALE")
-                .email("marco.violet@gmail.com")
+        RegisterUserAccountDTO quickAccount = new RegisterUserAccountDTO.Builder()
+                .setUsername("violet")
+                .setPassword("Violet!123")
+                .setName("Marco")
+                .setSurname("Violet")
+                .setGender("MALE")
+                .setEmail("marco.violet@gmail.com")
                 .build();
 
         String userQuickAccountURL = "/users/register";
