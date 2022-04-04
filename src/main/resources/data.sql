@@ -1,29 +1,7 @@
 
-DELETE FROM permissions_roles;
-DELETE FROM permissions;
-DELETE FROM users_roles;
-DELETE FROM roles;
-
 DELETE FROM contacts;
 DELETE FROM addresses;
 DELETE FROM users;
-
-INSERT INTO permissions(id, permission, note) VALUES (1, 'LOGIN', 'User Login');
-INSERT INTO permissions(id, permission, note) VALUES (2, 'VIEW_PROFILE', 'View user profile');
-INSERT INTO permissions(id, permission, note) VALUES (3, 'ADMIN_USER_DATA', 'Manage user data');
-
-INSERT INTO permissions(id, permission, note, enabled) VALUES (4, 'ADMIN_STATISTICS', 'View statistical graphs', false);
-
-INSERT INTO roles(id, role) VALUES (1, 'USER');
-INSERT INTO roles(id, role) VALUES (2, 'ADMINISTRATOR');
-
-INSERT INTO permissions_roles(permission_id, role_id) VALUES (1, 1);
-INSERT INTO permissions_roles(permission_id, role_id) VALUES (2, 1);
-
-INSERT INTO permissions_roles(permission_id, role_id) VALUES (1, 2);
-INSERT INTO permissions_roles(permission_id, role_id) VALUES (2, 2);
-INSERT INTO permissions_roles(permission_id, role_id) VALUES (3, 2);
-
 
 INSERT INTO users(id, username, password, name, surname, gender) VALUES (1, 'andrea', '1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=', 'Andrea', 'Test', 0);
 INSERT INTO users(id, username, password, name, surname, gender) VALUES (2, 'mario', '1d/NZaEqNgtEomytAPrwm/+QjmbudLg33oeEk77Xh88=', 'Mario', 'Rossi', 0);
@@ -38,19 +16,6 @@ UPDATE users SET ENABLED = false WHERE id = 6;
 
 UPDATE users SET birth_date = '1977-08-14' WHERE id = 1;
 UPDATE users SET secured = true WHERE id = 1;
-
-INSERT INTO users_roles(user_id, role_id) VALUES (1, 1);
-INSERT INTO users_roles(user_id, role_id) VALUES (1, 2);
-
-INSERT INTO users_roles(user_id, role_id) VALUES (2, 1);
-INSERT INTO users_roles(user_id, role_id) VALUES (3, 1);
-INSERT INTO users_roles(user_id, role_id) VALUES (4, 1);
-INSERT INTO users_roles(user_id, role_id) VALUES (5, 1);
-INSERT INTO users_roles(user_id, role_id) VALUES (6, 1);
-INSERT INTO users_roles(user_id, role_id) VALUES (7, 1);
-INSERT INTO users_roles(user_id, role_id) VALUES (8, 1);
-
-
 
 INSERT INTO contacts(user_id, email, phone, note) VALUES (1, 'andrea.test@gmail.com', NULL, NULL);
 INSERT INTO contacts(user_id, email, phone, note) VALUES (2, 'mario.rossi@gmail.com', NULL, 'test contact note on mario rossi');
